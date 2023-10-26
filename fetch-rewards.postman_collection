@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "9a002cab-7dea-4eb4-86fe-5fb90405ccac",
+		"name": "Fetch Rewards",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30135389"
+	},
+	"item": [
+		{
+			"name": "Process Receipt",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "localhost:8080",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"retailer\": \"M&M Corner Market\",\r\n  \"purchaseDate\": \"2022-03-20\",\r\n  \"purchaseTime\": \"14:33\",\r\n  \"items\": [\r\n    {\r\n      \"shortDescription\": \"Gatorade\",\r\n      \"price\": \"2.25\"\r\n    },{\r\n      \"shortDescription\": \"Gatorade\",\r\n      \"price\": \"2.25\"\r\n    },{\r\n      \"shortDescription\": \"Gatorade\",\r\n      \"price\": \"2.25\"\r\n    },{\r\n      \"shortDescription\": \"Gatorade\",\r\n      \"price\": \"2.25\"\r\n    }\r\n  ],\r\n  \"total\": \"9.00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/receipts/process",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"receipts",
+						"process"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Points",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/receipts/8ef4c4df-f865-4967-9131-7ac1c486997a/points",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"receipts",
+						"8ef4c4df-f865-4967-9131-7ac1c486997a",
+						"points"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
