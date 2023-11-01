@@ -2,15 +2,12 @@ package com.fetch.rewards.service;
 
 import com.fetch.rewards.dto.Receipt;
 
-import java.text.ParseException;
-import java.time.LocalTime;
-
-public class PurchaseTimePointsHandler implements PointsHandler{
+public class PurchaseTimePointsHandler implements PointsCalculator {
     private static final int PURCHASE_TIME_POINTS = 10;
-    private PointsHandler pointsHandler;
+    private PointsCalculator pointsCalculator;
     @Override
-    public void setNextPointsHandler(PointsHandler pointsHandler) {
-        this.pointsHandler = pointsHandler;
+    public void setNextPointsHandler(PointsCalculator pointsCalculator) {
+        this.pointsCalculator = pointsCalculator;
     }
 
     @Override
@@ -19,8 +16,8 @@ public class PurchaseTimePointsHandler implements PointsHandler{
         if(checkPurchaseTimeRange(receipt.getPurchaseTime())){
             pointsValue = PURCHASE_TIME_POINTS;
         }
-        if (pointsHandler != null) {
-            int nextPointsValue = pointsHandler.processRecepit(receipt);
+        if (pointsCalculator != null) {
+            int nextPointsValue = pointsCalculator.processRecepit(receipt);
             return pointsValue + nextPointsValue;
         }
         return pointsValue;

@@ -2,22 +2,20 @@ package com.fetch.rewards.service;
 
 import com.fetch.rewards.dto.Receipt;
 
-import java.text.ParseException;
+public class AlphaNumericRetailerPointsHandler implements PointsCalculator {
 
-public class AlphaNumericRetailerPointsHandler implements PointsHandler {
-
-    private PointsHandler pointsHandler;
+    private PointsCalculator pointsCalculator;
     @Override
-    public void setNextPointsHandler(PointsHandler pointsHandler) {
-        this.pointsHandler = pointsHandler;
+    public void setNextPointsHandler(PointsCalculator pointsCalculator) {
+        this.pointsCalculator = pointsCalculator;
     }
 
     @Override
     public int processRecepit(Receipt receipt) {
         String alphaNumericRetailer = removeNonAlphanumeric(receipt.getRetailer());
         int pointsValue = alphaNumericRetailer.length();
-        if (pointsHandler != null) {
-            int nextPointsValue = pointsHandler.processRecepit(receipt);
+        if (pointsCalculator != null) {
+            int nextPointsValue = pointsCalculator.processRecepit(receipt);
             return pointsValue + nextPointsValue;
         }
         return pointsValue;

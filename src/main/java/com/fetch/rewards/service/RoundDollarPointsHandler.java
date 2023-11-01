@@ -2,15 +2,13 @@ package com.fetch.rewards.service;
 
 import com.fetch.rewards.dto.Receipt;
 
-import java.text.ParseException;
-
-public class RoundDollarPointsHandler implements PointsHandler{
-    private PointsHandler pointsHandler;
+public class RoundDollarPointsHandler implements PointsCalculator {
+    private PointsCalculator pointsCalculator;
 
     private static final int ROUND_DOLLAR_POINTS = 50;
     @Override
-    public void setNextPointsHandler(PointsHandler pointsHandler) {
-        this.pointsHandler = pointsHandler;
+    public void setNextPointsHandler(PointsCalculator pointsCalculator) {
+        this.pointsCalculator = pointsCalculator;
     }
     @Override
     public int processRecepit(Receipt receipt) {
@@ -18,8 +16,8 @@ public class RoundDollarPointsHandler implements PointsHandler{
         if(isRoundDollarAmount(receipt.getTotal())){
             pointsValue =  ROUND_DOLLAR_POINTS;
         }
-        if (pointsHandler != null) {
-            int nextPointsValue = pointsHandler.processRecepit(receipt);
+        if (pointsCalculator != null) {
+            int nextPointsValue = pointsCalculator.processRecepit(receipt);
             return pointsValue + nextPointsValue;
         }
         return pointsValue;

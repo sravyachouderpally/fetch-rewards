@@ -2,14 +2,12 @@ package com.fetch.rewards.service;
 
 import com.fetch.rewards.dto.Receipt;
 
-import java.text.ParseException;
-
-public class QuarterTotalPointsHandler implements PointsHandler{
+public class QuarterTotalPointsHandler implements PointsCalculator {
     private static final int TOTAL_QUARTER_POINTS = 25;
-    private PointsHandler pointsHandler;
+    private PointsCalculator pointsCalculator;
     @Override
-    public void setNextPointsHandler(PointsHandler pointsHandler) {
-        this.pointsHandler = pointsHandler;
+    public void setNextPointsHandler(PointsCalculator pointsCalculator) {
+        this.pointsCalculator = pointsCalculator;
     }
 
     @Override
@@ -18,8 +16,8 @@ public class QuarterTotalPointsHandler implements PointsHandler{
         if(isMultipleOfQuarter(receipt.getTotal())){
             pointsValue =  TOTAL_QUARTER_POINTS;
         }
-        if (pointsHandler != null) {
-            int nextPointsValue = pointsHandler.processRecepit(receipt);
+        if (pointsCalculator != null) {
+            int nextPointsValue = pointsCalculator.processRecepit(receipt);
             return pointsValue + nextPointsValue;
         }
         return pointsValue;

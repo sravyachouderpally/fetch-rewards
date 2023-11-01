@@ -61,7 +61,7 @@ curl -X GET -H "Content-Type: application/json" http://localhost:8080/receipts/d
 ### Import the Postman Collection
 - To import the Postman collection:
     - In the top left corner of Postman, click on the "Import" button.
-    - Import this [Postman collection](https://github.com/sravyachouderpally/fetch-internship-challenge/blob/main/fetch-application-collection) from the repository.
+    - Import this [Postman collection](https://github.com/sravyachouderpally/fetch-rewards/blob/main/fetch-rewards.postman_collection) from the repository.
     - After importing, you will see the imported collection listed in the left sidebar of Postman under "Collections."
     - Click on the collection to expand it and see the requests and folders it contains.
     - To run a request within the collection, click on the request's name in the collection.

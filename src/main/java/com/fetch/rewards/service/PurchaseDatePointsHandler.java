@@ -2,16 +2,12 @@ package com.fetch.rewards.service;
 
 import com.fetch.rewards.dto.Receipt;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-public class PurchaseDatePointsHandler implements PointsHandler{
-    private PointsHandler pointsHandler;
+public class PurchaseDatePointsHandler implements PointsCalculator {
+    private PointsCalculator pointsCalculator;
     private static final int PURCHASE_DAY_ODD_POINTS = 6;
     @Override
-    public void setNextPointsHandler(PointsHandler pointsHandler) {
-        this.pointsHandler = pointsHandler;
+    public void setNextPointsHandler(PointsCalculator pointsCalculator) {
+        this.pointsCalculator = pointsCalculator;
     }
 
     @Override
@@ -20,8 +16,8 @@ public class PurchaseDatePointsHandler implements PointsHandler{
         if(isPurchaseDayOdd(receipt.getPurchaseDate())){
             pointsValue = PURCHASE_DAY_ODD_POINTS;
         }
-        if (pointsHandler != null) {
-            int nextPointsValue = pointsHandler.processRecepit(receipt);
+        if (pointsCalculator != null) {
+            int nextPointsValue = pointsCalculator.processRecepit(receipt);
             return pointsValue + nextPointsValue;
         }
         return pointsValue;

@@ -3,21 +3,20 @@ package com.fetch.rewards.service;
 import com.fetch.rewards.dto.Item;
 import com.fetch.rewards.dto.Receipt;
 
-import java.text.ParseException;
 import java.util.List;
 
-public class ItemDescriptionPointsHandler implements PointsHandler{
-    private PointsHandler pointsHandler;
+public class ItemDescriptionPointsHandler implements PointsCalculator {
+    private PointsCalculator pointsCalculator;
     @Override
-    public void setNextPointsHandler(PointsHandler pointsHandler) {
-        this.pointsHandler = pointsHandler;
+    public void setNextPointsHandler(PointsCalculator pointsCalculator) {
+        this.pointsCalculator = pointsCalculator;
     }
 
     @Override
     public int processRecepit(Receipt receipt) {
         int pointsValue = isMultipleOfThree(receipt.getItems());
-        if (pointsHandler != null) {
-            int nextPointsValue = pointsHandler.processRecepit(receipt);
+        if (pointsCalculator != null) {
+            int nextPointsValue = pointsCalculator.processRecepit(receipt);
             return pointsValue + nextPointsValue;
         }
         return pointsValue;
